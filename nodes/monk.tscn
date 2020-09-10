@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://nodes/monk.png" type="Texture" id=1]
+[ext_resource path="res://nodes/actor.gd" type="Script" id=2]
+
+[node name="Sprite" type="Sprite"]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -3 )
+vframes = 4
+hframes = 4
+frame = 12
+script = ExtResource( 2 )
+actorName = "Monk"
+move = 4
+maxHP = 68
+HP = 68
