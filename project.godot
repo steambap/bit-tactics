@@ -16,8 +16,18 @@ _global_script_class_icons={
 [application]
 
 config/name="bit-tactics"
+run/main_scene="res://scenes/01_castle.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=960
+window/size/height=540
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
+environment/default_clear_color=Color( 0.211765, 0.196078, 0.231373, 1 )
 environment/default_environment="res://default_env.tres"
