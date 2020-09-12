@@ -1,0 +1,18 @@
+[gd_scene format=2]
+
+[node name="damage_popup" type="Node2D"]
+position = Vector2( 0, -14 )
+z_index = 5
+z_as_relative = false
+
+[node name="value" type="Label" parent="."]
+margin_left = -19.0
+margin_top = -6.0
+margin_right = 21.0
+margin_bottom = 8.0
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = "45"
+__meta__ = {
+"_edit_use_anchors_": false
+}
