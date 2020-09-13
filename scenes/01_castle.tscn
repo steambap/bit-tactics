@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://tilesets/grassland.tres" type="TileSet" id=1]
 [ext_resource path="res://tilesets/castle.tres" type="TileSet" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://nodes/prince.png" type="Texture" id=10]
 [ext_resource path="res://nodes/actor.gd" type="Script" id=11]
 [ext_resource path="res://nodes/start_dialogue.tscn" type="PackedScene" id=12]
+[ext_resource path="res://nodes/teleport_actor.tscn" type="PackedScene" id=13]
+[ext_resource path="res://nodes/ninja.tscn" type="PackedScene" id=14]
 
 [node name="scene" type="Node"]
 script = ExtResource( 5 )
@@ -93,6 +95,34 @@ script = ExtResource( 11 )
 actorName = "Vladimir"
 group = 1
 
+[node name="ninja_a" parent="objects" groups=[
+"actors",
+] instance=ExtResource( 14 )]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -39.645, 29.921 )
+offset = Vector2( 0, -3 )
+
+[node name="ninja_b" parent="objects" groups=[
+"actors",
+] instance=ExtResource( 14 )]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -25.014, 23.709 )
+offset = Vector2( 0, -3 )
+
+[node name="ninja_c" parent="objects" groups=[
+"actors",
+] instance=ExtResource( 14 )]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 113.835, 58.253 )
+offset = Vector2( 0, -3 )
+
+[node name="ninja_d" parent="objects" groups=[
+"actors",
+] instance=ExtResource( 14 )]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -17, 77 )
+offset = Vector2( 0, -3 )
+
 [node name="castle_intro" parent="." instance=ExtResource( 6 )]
 
 [node name="wait_15f" parent="castle_intro" instance=ExtResource( 8 )]
@@ -154,3 +184,37 @@ frames = 45
 
 [node name="start_dialogue" parent="castle_intro" instance=ExtResource( 12 )]
 dialogue = "01_castle"
+
+[node name="wait_15f3" parent="castle_intro" instance=ExtResource( 8 )]
+frames = 15
+
+[node name="unhide_ninja_a" parent="castle_intro" instance=ExtResource( 7 )]
+actor = NodePath("../../objects/ninja_a")
+waitEnd = true
+
+[node name="unhide_ninja_b" parent="castle_intro" instance=ExtResource( 7 )]
+actor = NodePath("../../objects/ninja_b")
+waitEnd = true
+
+[node name="move_ninja_a" parent="castle_intro" instance=ExtResource( 9 )]
+actor = NodePath("../../objects/ninja_a")
+position = Vector2( 2, 6 )
+
+[node name="move_ninja_b" parent="castle_intro" instance=ExtResource( 9 )]
+actor = NodePath("../../objects/ninja_b")
+position = Vector2( 2, 4 )
+
+[node name="teleport_ninja_c" parent="castle_intro" instance=ExtResource( 13 )]
+actor = NodePath("../../objects/ninja_c")
+position = Vector2( 16, 5 )
+
+[node name="unhide_ninja_c" parent="castle_intro" instance=ExtResource( 7 )]
+actor = NodePath("../../objects/ninja_c")
+waitEnd = true
+
+[node name="unhide_ninja_d" parent="castle_intro" instance=ExtResource( 7 )]
+actor = NodePath("../../objects/ninja_d")
+waitEnd = true
+
+[node name="wait_45f2" parent="castle_intro" instance=ExtResource( 8 )]
+frames = 45

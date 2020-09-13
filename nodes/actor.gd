@@ -27,7 +27,7 @@ var aiActionEndTimer = -1
 var isWaitingForNextStepAI = false
 var nextStepTimerAI = 0
 
-onready var scene = get_node("/root/scene")
+onready var scene = get_tree().current_scene
 
 func _ready():
 	set_process(true)
