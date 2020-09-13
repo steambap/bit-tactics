@@ -21,7 +21,7 @@ func _init(_width, _height):
 		for y in range(height):
 			#get current point and its position
 			var current = flatten(x, y)
-			var cpos = astar.get_point_pos(current)
+			var cpos = astar.get_point_position(current)
 			
 			#get neighbours
 			var u = cpos + Vector3(0, -1, 0)
@@ -84,7 +84,7 @@ func point_within(_x, _y):
 
 func connect_with_neighbour_at(point_id, offset):
 	#get current point and its position
-	var cpos = astar.get_point_pos(point_id)
+	var cpos = astar.get_point_position(point_id)
 	
 	var p = cpos + Vector3(offset.x, offset.y, 0)
 	
@@ -94,7 +94,7 @@ func connect_with_neighbour_at(point_id, offset):
 
 func disconnect_with_neighbour_at(point_id, offset):
 	#get current point and its position
-	var cpos = astar.get_point_pos(point_id)
+	var cpos = astar.get_point_position(point_id)
 	var p = cpos + Vector3(offset.x, offset.y, 0)
 	
 	#connect points
