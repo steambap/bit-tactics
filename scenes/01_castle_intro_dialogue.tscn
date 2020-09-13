@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/dialogue_data.gd" type="Script" id=1]
+[ext_resource path="res://scripts/dialogue_check.gd" type="Script" id=2]
+
+[node name="Node" type="Node"]
+script = ExtResource( 2 )
+dialogue = "01_castle"
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource( 1 )
+speaker = "Vladimir"
+speech = "I can not believe you monks made it to the castle. You peasants leave me no choice!"
+
+[node name="Node2" type="Node" parent="."]
+script = ExtResource( 1 )
+speaker = "monk c"
+speech = "Get out of our way!"
+
+[node name="Node3" type="Node" parent="."]
+script = ExtResource( 1 )
+speaker = "monk a"
+speech = "Yeah!"
+
+[node name="Node4" type="Node" parent="."]
+script = ExtResource( 1 )
+speaker = "monk d"
+speech = "I agree!"
+
+[node name="Node5" type="Node" parent="."]
+script = ExtResource( 1 )
+speaker = "monk b"
+speech = "Me too!"
+
+[node name="Node6" type="Node" parent="."]
+script = ExtResource( 1 )
+speaker = "Vladimir"
+speech = "You are surrounded, there's no way you four will leave this castle alive!"

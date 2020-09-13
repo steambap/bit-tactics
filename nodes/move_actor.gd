@@ -23,7 +23,7 @@ func start(_manager):
 		end()
 
 func skip():
-	actorNode.set_pos(manager.scene.map_to_world_fixed(position))
+	actorNode.position = manager.scene.map_to_world_fixed(position)
 	actorNode.path.resize(0)
 	end()
 

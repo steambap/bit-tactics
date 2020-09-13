@@ -30,7 +30,6 @@ var nextStepTimerAI = 0
 onready var scene = get_node("/root/scene")
 
 func _ready():
-	#path.append(Vector2(50, 50))
 	set_process(true)
 	pass
 
@@ -369,7 +368,7 @@ func block_enemy_cells(enable):
 				scene.get_mstar().forbidv(p)
 				
 				var m = scene.get_mstar()
-				print(m.astar.get_point_pos(m.flatten(p.x, p.y)), " has been FORBIDDEN!")
+				print(m.astar.get_point_position(m.flatten(p.x, p.y)), " has been FORBIDDEN!")
 	else:
 		for _actor in scene.get_actors():
 			#forbid actor's position if it's from another team

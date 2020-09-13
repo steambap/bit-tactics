@@ -27,7 +27,7 @@ func work():
 		print(get_name(), " has ended!")
 
 func _input(ev):
-	if ev.is_action_pressed("ui_accept"):
+	if ev.is_action_pressed("ui_cancel"):
 		
 		for c in get_children():
 			c.skip()
