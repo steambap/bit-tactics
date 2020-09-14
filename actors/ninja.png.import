@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/prince.png-5f987616c676eb9899d3b8f43ab7e605.stex"
+path="res://.import/ninja.png-fe8eebfbeeca7e581c57bb68975cac3b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://nodes/prince.png"
-dest_files=[ "res://.import/prince.png-5f987616c676eb9899d3b8f43ab7e605.stex" ]
+source_file="res://actors/ninja.png"
+dest_files=[ "res://.import/ninja.png-fe8eebfbeeca7e581c57bb68975cac3b.stex" ]
 
 [params]
 

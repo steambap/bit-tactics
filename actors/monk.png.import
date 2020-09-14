@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/monk.png-6dad31cafd857c8b6ee400b6c35dad27.stex"
+path="res://.import/monk.png-c7507087778903370a567fa7473c1c35.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://nodes/monk.png"
-dest_files=[ "res://.import/monk.png-6dad31cafd857c8b6ee400b6c35dad27.stex" ]
+source_file="res://actors/monk.png"
+dest_files=[ "res://.import/monk.png-c7507087778903370a567fa7473c1c35.stex" ]
 
 [params]
 

@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://nodes/actor.gd" type="Script" id=1]
-[ext_resource path="res://nodes/ninja.png" type="Texture" id=2]
+[ext_resource path="res://actors/actor.gd" type="Script" id=1]
+[ext_resource path="res://actors/ninja.png" type="Texture" id=2]
+
 
 [node name="ninja" type="Sprite"]
 position = Vector2( 20, 20 )

@@ -1,6 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://nodes/move_actor.gd" type="Script" id=1]
+[ext_resource path="res://cutscenes/move_actor.gd" type="Script" id=1]
+
+
 
 [node name="move_actor" type="Node"]
 script = ExtResource( 1 )

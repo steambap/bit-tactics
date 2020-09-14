@@ -1,6 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://nodes/unhide_actor.gd" type="Script" id=1]
+[ext_resource path="res://cutscenes/unhide_actor.gd" type="Script" id=1]
+
+
 
 [node name="unhide_actor" type="Node"]
 script = ExtResource( 1 )
