@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://nodes/battle_manager.gd" type="Script" id=1]
 [ext_resource path="res://fonts/pixelated.ttf" type="DynamicFontData" id=2]
@@ -55,6 +55,33 @@ func activate(enable):
 	active = enable
 "
 
+[sub_resource type="GDScript" id=7]
+script/source = "extends Panel
+
+func _ready():
+	# Called every time the node is added to the scene.
+	# Initialization here
+	pass
+
+func update_info(actor):
+	$name.set_text(actor.actorName)
+	
+	#if it's an enemy, show its name red, otherwise, blue
+	if actor.get_group() > 0:
+		$name.set(\"custom_colors/font_color\", Color(1.0, 0.25, 0.25, 1.0))
+	else:
+		$name.set(\"custom_colors/font_color\", Color(0.25, 0.25, 1.0, 1.0))
+		
+	$health/value.set_text(str(actor.HP, \"/\", actor.maxHP))
+
+func _on_battle_has_found_an_actor(actor):
+	if actor == null:
+		self.hide()
+	else:
+		update_info(actor)
+		self.show()
+"
+
 [sub_resource type="DynamicFont" id=2]
 size = 8
 font_data = ExtResource( 2 )
@@ -99,6 +126,10 @@ margin_right = 50.0
 margin_bottom = 133.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+script = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="name" type="Label" parent="ui/BEBE/actor_info"]
 margin_left = 3.0
@@ -178,14 +209,18 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Player"
 
 [node name="turn_post" type="Label" parent="ui/BBBB/turn_panel/turn"]
-anchor_left = 0.5
+anchor_left = 0.67
 anchor_right = 1.0
 margin_left = 4.0
-margin_right = -15.0
-margin_bottom = 9.0
+margin_top = 0.188297
+margin_right = 5.0
+margin_bottom = 9.1883
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "turn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="EEEE" type="Control" parent="ui"]
 visible = false
@@ -197,3 +232,6 @@ size_flags_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="has_found_an_actor" from="." to="ui/BEBE/actor_info" method="_on_battle_has_found_an_actor"]
+[connection signal="has_clicked" from="cursor" to="." method="_on_cursor_has_clicked"]
+[connection signal="has_moved" from="cursor" to="." method="_on_cursor_has_moved"]
