@@ -18,7 +18,7 @@ func end():
 	manager.work()
 	queue_free()
 
-func _process(dt):
+func _process(_dt):
 	if frames <= 0:
 		end()
 	else:

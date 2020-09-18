@@ -5,7 +5,7 @@ var manager
 func start(_manager):
 	manager = _manager
 	var Battle = preload("res://nodes/battle_manager.tscn").instance()
-	var battle = manager.scene.add_child(Battle)
+	manager.scene.add_child(Battle)
 
 func end():
 	print(get_name(), " has ended!")

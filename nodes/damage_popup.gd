@@ -7,7 +7,7 @@ var toDie = false
 func _ready():
 	goalY = self.global_position - Vector2(0, 12)
 
-func _process(dt):
+func _process(_dt):
 	if !toDie:
 		var motion = goalY - self.global_position
 		translate(motion / 8)

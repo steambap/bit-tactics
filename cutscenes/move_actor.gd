@@ -33,7 +33,7 @@ func end():
 	manager.content.pop_front()
 	manager.work()
 
-func _process(dt):
+func _process(_dt):
 	if !actorNode.should_move():
 		if shouldWaitArrival:
 			end()

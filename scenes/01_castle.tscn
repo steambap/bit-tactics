@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://tilesets/grassland.tres" type="TileSet" id=1]
 [ext_resource path="res://tilesets/castle.tres" type="TileSet" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://cutscenes/start_dialogue.tscn" type="PackedScene" id=12]
 [ext_resource path="res://cutscenes/teleport_actor.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/ninja.tscn" type="PackedScene" id=14]
+[ext_resource path="res://cutscenes/start_battle.tscn" type="PackedScene" id=15]
 
 [node name="scene" type="Node"]
 script = ExtResource( 5 )
@@ -218,3 +219,5 @@ waitEnd = true
 
 [node name="wait_45f2" parent="castle_intro" instance=ExtResource( 8 )]
 frames = 45
+
+[node name="start_battle" parent="castle_intro" instance=ExtResource( 15 )]

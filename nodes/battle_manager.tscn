@@ -1,3 +1,199 @@
-[gd_scene format=2]
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://nodes/battle_manager.gd" type="Script" id=1]
+[ext_resource path="res://fonts/pixelated.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+onready var manager = get_parent()
+var active = true
+
+signal has_moved
+signal has_clicked
+
+func _ready():
+	set_process_input(true)
+	pass
+
+func _input(ev):
+	if active:
+		var terrain = manager.get_scene().get_terrain_collider()
+		var pos = terrain.world_to_map(self.position)
+		var cellSize = terrain.get_cell_size()
+		
+		if ev.is_action_pressed(\"ui_right\"):
+			if terrain.get_cellv(pos + Vector2(1, 0)) < 0:
+				translate(Vector2(cellSize.x * 0.5, cellSize.y * 0.5))
+				emit_signal(\"has_moved\", self)
+				get_tree().set_input_as_handled()
+		
+		elif ev.is_action_pressed(\"ui_left\"):
+			if terrain.get_cellv(pos - Vector2(1, 0)) < 0:
+				translate(-Vector2(cellSize.x * 0.5, cellSize.y * 0.5))
+				emit_signal(\"has_moved\", self)
+				get_tree().set_input_as_handled()
+	
+		elif ev.is_action_pressed(\"ui_down\"):
+			if terrain.get_cellv(pos + Vector2(0, 1)) < 0:
+				translate(Vector2(-cellSize.x * 0.5, cellSize.y * 0.5))
+				emit_signal(\"has_moved\", self)
+				get_tree().set_input_as_handled()
+	
+		elif ev.is_action_pressed(\"ui_up\"):
+			if terrain.get_cellv(pos - Vector2(0, 1)) < 0:
+				translate(-Vector2(-cellSize.x * 0.5, cellSize.y * 0.5))
+				emit_signal(\"has_moved\", self)
+				get_tree().set_input_as_handled()
+		
+		elif ev.is_action_pressed(\"ui_accept\"):
+			emit_signal(\"has_clicked\", self)
+			get_tree().set_input_as_handled()
+
+func activate(enable):
+	print(\"Cursor state changed to \", enable, \".\")
+	active = enable
+"
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 8
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 8
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 8
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 8
+font_data = ExtResource( 2 )
 
 [node name="battle" type="Node"]
+script = ExtResource( 1 )
+
+[node name="cursor" type="Sprite" parent="."]
+visible = false
+position = Vector2( 24, 56 )
+z_index = -1
+script = SubResource( 1 )
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="BEBE" type="Control" parent="ui"]
+rect_scale = Vector2( 4, 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="actor_info" type="Panel" parent="ui/BEBE"]
+margin_left = 2.0
+margin_top = 114.0
+margin_right = 50.0
+margin_bottom = 133.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="name" type="Label" parent="ui/BEBE/actor_info"]
+margin_left = 3.0
+margin_right = 40.0
+margin_bottom = 9.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Guy"
+
+[node name="health" type="Label" parent="ui/BEBE/actor_info"]
+margin_left = 3.0
+margin_top = 9.0
+margin_right = 43.0
+margin_bottom = 23.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "HP:"
+
+[node name="value" type="Label" parent="ui/BEBE/actor_info/health"]
+margin_left = 12.0
+margin_right = 52.0
+margin_bottom = 14.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "888/888"
+
+[node name="BBEE" type="Control" parent="ui"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="target2" type="Position2D" parent="ui/BBEE"]
+position = Vector2( 116.669, 61.612 )
+z_as_relative = false
+
+[node name="target2b" type="Position2D" parent="ui/BBEE"]
+position = Vector2( 55.245, -21.669 )
+z_as_relative = false
+
+[node name="BBBB" type="Control" parent="ui"]
+margin_right = 240.0
+margin_bottom = 135.0
+rect_scale = Vector2( 4, 4 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="turn_panel" type="Panel" parent="ui/BBBB"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 46.0
+margin_bottom = 14.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="turn" type="Label" parent="ui/BBBB/turn_panel"]
+margin_left = 3.0
+margin_top = 1.0
+margin_right = 31.0
+margin_bottom = 10.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Player"
+
+[node name="turn_post" type="Label" parent="ui/BBBB/turn_panel/turn"]
+anchor_left = 0.5
+anchor_right = 1.0
+margin_left = 4.0
+margin_right = -15.0
+margin_bottom = 9.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "turn"
+
+[node name="EEEE" type="Control" parent="ui"]
+visible = false
+margin_right = 240.0
+margin_bottom = 135.0
+rect_scale = Vector2( 4, 4 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

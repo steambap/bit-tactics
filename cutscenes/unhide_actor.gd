@@ -29,7 +29,7 @@ func end():
 	manager.content.pop_front()
 	manager.work()
 
-func _process(dt):
+func _process(_dt):
 	var o = _actor.modulate.a
 	
 	if o >= 1.0:

@@ -36,7 +36,7 @@ func _ready():
 func should_move():
 	return path.size() > 0
 
-func _process(delta):
+func _process(_dt):
 	if isAI && isWaitingForNextStepAI:
 		if nextStepTimerAI <= 0:
 			isWaitingForNextStepAI = false
@@ -212,8 +212,8 @@ func get_movable_panels():
 				continue
 			
 			#if nothing works, I have to use A* to find out
-			var path = scene.get_mstar().find_path_v(source, pos)
-			if path.size() < 1 || path.size() > move:
+			var pathV = scene.get_mstar().find_path_v(source, pos)
+			if pathV.size() < 1 || pathV.size() > move:
 				continue
 			
 			#seems like it's available ;_;
@@ -240,10 +240,10 @@ func get_nearest_foe():
 	
 	for foe in get_foes():
 		var pos = foe.get_map_position()
-		var path = scene.get_mstar().find_path_v(source, pos)
+		var pathV = scene.get_mstar().find_path_v(source, pos)
 		
-		if path.size() < nearestDistance:
-			nearestDistance = path.size()
+		if pathV.size() < nearestDistance:
+			nearestDistance = pathV.size()
 			nearest = foe
 	
 	return nearest
@@ -260,14 +260,14 @@ func get_nearest_foe_and_info():
 	for foe in get_foes():
 		#get its position and find a path to it
 		var pos = foe.get_map_position()
-		var path = scene.get_mstar().find_path_v(source, pos)
+		var pathV = scene.get_mstar().find_path_v(source, pos)
 		
 		#if nearest hasn't been set or the distance to THIS guy is lower than the current nearest
-		if path.size() <= distance:
+		if pathV.size() <= distance:
 			#this is the new nearest
 			distance = path.size()
 			nearest = foe
-			n["path"] = path
+			n["path"] = pathV
 			n["actor"] = nearest
 			n["distance"] = distance - 1
 	
