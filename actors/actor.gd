@@ -105,9 +105,9 @@ func ai_make_decision(_manager):
 
 func set_gray(enable):
 	if enable:
-		set_material(load("res://assets/shaders/black_white.material.tres"))
+		self.modulate.v = 0.5
 	else:
-		set_material(null)
+		self.modulate.v = 1
 
 #THIS WILL RETURN THE PANELS (VECTOR2'S) THIS ACTOR CAN MOVE TO!
 func get_targettable_panels():
@@ -115,21 +115,6 @@ func get_targettable_panels():
 	var source = get_map_position()#scene.get_terrain().world_to_map(get_pos())
 	#var actors = scene.get_actors()
 	var targettable = []
-	#var actorsPos = []
-	
-#	#first of all, let's forbid enemy cells (allies' stay free as they can move through them)
-#	for actor in actors:
-#		#if self, ignore (since an unit can move to its own panel)
-#		if actor == self:
-#			continue
-#		
-#		#let's keep track of actors positions to use later!
-#		var ap = actor.get_map_position()#scene.get_terrain().world_to_map(actor.get_pos())
-#		actorsPos.append(ap)
-#		
-#		#forbid actor's position if it's from another team
-#		if actor.get_group() != group:
-#			scene.get_mstar().forbidv(ap)
 	
 	for x in range(max(1, source.x - attackRange), source.x + attackRange + 1):
 		for y in range(max(1, source.y - attackRange), source.y + attackRange + 1):

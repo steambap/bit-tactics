@@ -198,7 +198,7 @@ __meta__ = {
 [node name="turn_panel" type="Panel" parent="ui/BBBB"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 46.0
+margin_right = 50.0
 margin_bottom = 14.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -252,14 +252,18 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -48.0
+margin_left = -50.0
 margin_top = -22.0
 margin_right = -2.0
-margin_bottom = -4.0
+margin_bottom = -3.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 8 )
 text = "End Turn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="has_found_an_actor" from="." to="ui/BEBE/actor_info" method="_on_battle_has_found_an_actor"]
 [connection signal="has_clicked" from="cursor" to="." method="_on_cursor_has_clicked"]
 [connection signal="has_moved" from="cursor" to="." method="_on_cursor_has_moved"]
+[connection signal="pressed" from="ui/turn_control/next_turn" to="." method="_on_next_turn_pressed"]

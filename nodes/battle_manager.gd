@@ -62,20 +62,9 @@ func get_turn_name(_turn):
 
 func _input(ev):
 	if ev.is_action_pressed("ui_end"):
-		ev.set_input_as_handled()
+
 		if turn == 0:
-			set_turn(1)
-			activate(false)
-			get_node("userInterface/BBBB/turnPanel/turn").set_text(str(get_turn_name(turn)))
-			
-			if turn == 0:
-				get_node("userInterface/BBBB/turnPanel/turn").set("custom_colors/font_color", Color(0.25, 0.25, 1.0, 1.0))
-			else:
-				get_node("userInterface/BBBB/turnPanel/turn").set("custom_colors/font_color", Color(1.0, 0.25, 0.25, 1.0))
-			
-			print("Turn has changed to ", turn)
-			
-			enemyAI.start()
+			next_turn()
 			get_tree().set_input_as_handled()
 
 func get_scene():
@@ -140,4 +129,16 @@ func _on_letTheBattle_intro_has_ended():
 	activate(true)
 	get_cursor().show()
 	get_cursor().activate(true)
-	pass # replace with function body
+
+func _on_next_turn_pressed():
+	next_turn()
+
+func next_turn():
+	set_turn(1)
+	activate(false)
+	$ui/BBBB/turn_panel/turn.set_text(str(get_turn_name(turn)))
+	$ui/BBBB/turn_panel/turn.set("custom_colors/font_color", Color(1.0, 0.25, 0.25, 1.0))
+	
+	print("Turn has changed to ", turn)
+	
+	enemyAI.start()
