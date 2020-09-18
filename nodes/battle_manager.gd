@@ -61,8 +61,8 @@ func get_turn_name(_turn):
 		return "Enemy"
 
 func _input(ev):
-	#print("SD")
 	if ev.is_action_pressed("ui_end"):
+		ev.set_input_as_handled()
 		if turn == 0:
 			set_turn(1)
 			activate(false)

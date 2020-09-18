@@ -28,6 +28,6 @@ func work():
 
 func _input(ev):
 	if ev.is_action_pressed("ui_cancel"):
-		
+		set_process_input(false)
 		for c in get_children():
 			c.skip()

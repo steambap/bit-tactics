@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://nodes/battle_manager.gd" type="Script" id=1]
 [ext_resource path="res://fonts/pixelated.ttf" type="DynamicFontData" id=2]
@@ -100,6 +100,10 @@ size = 8
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=7]
+size = 8
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=8]
 size = 8
 font_data = ExtResource( 2 )
 
@@ -234,6 +238,28 @@ size_flags_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="turn_control" type="Control" parent="ui"]
+margin_right = 240.0
+margin_bottom = 135.0
+rect_scale = Vector2( 4, 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="next_turn" type="Button" parent="ui/turn_control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -48.0
+margin_top = -22.0
+margin_right = -2.0
+margin_bottom = -4.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 8 )
+text = "End Turn"
 [connection signal="has_found_an_actor" from="." to="ui/BEBE/actor_info" method="_on_battle_has_found_an_actor"]
 [connection signal="has_clicked" from="cursor" to="." method="_on_cursor_has_clicked"]
 [connection signal="has_moved" from="cursor" to="." method="_on_cursor_has_moved"]

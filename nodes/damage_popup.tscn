@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://nodes/damage_popup.gd" type="Script" id=1]
+[ext_resource path="res://fonts/pixelated.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 2 )
 
 [node name="damage_popup" type="Node2D"]
 position = Vector2( 50, 50 )
@@ -15,6 +20,7 @@ margin_right = 21.0
 margin_bottom = 8.0
 size_flags_horizontal = 2
 size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.960784, 0.960784, 0.960784, 1 )
 custom_constants/shadow_offset_x = 1
 text = "45"
