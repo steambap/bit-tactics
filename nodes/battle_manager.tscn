@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://nodes/battle_manager.gd" type="Script" id=1]
 [ext_resource path="res://fonts/pixelated.ttf" type="DynamicFontData" id=2]
@@ -95,6 +95,81 @@ font_data = ExtResource( 2 )
 size = 8
 font_data = ExtResource( 2 )
 
+[sub_resource type="GDScript" id=9]
+script/source = "extends Node2D
+var fadingOut = false
+var stopped = false
+var timer = 45
+onready var target = get_node(\"../target2\")
+
+signal intro_has_ended
+
+func _process(dt):
+	var motion = target.position - self.position
+	translate(motion / 10)
+	
+	if motion.length_squared() < 0.1:
+		stopped = true
+	
+	if fadingOut:
+		var l = $label
+		var c = l.get(\"custom_colors/font_color\")
+		c.a -= 0.2
+
+		if c.a <= 0.0:
+			queue_free()
+			emit_signal(\"intro_has_ended\")
+		else:
+			l.set(\"custom_colors/font_color\", c)
+
+	if stopped:
+		timer -= 1
+		
+		if timer <= 0:
+			target = get_node(\"../target2b\")
+			fadingOut = true
+			stopped = false
+"
+
+[sub_resource type="DynamicFont" id=10]
+font_data = ExtResource( 2 )
+
+[sub_resource type="GDScript" id=11]
+script/source = "extends Node2D
+var fadingOut = false
+var stopped = false
+var timer = 45
+onready var target = get_node(\"../target1\")
+
+signal intro_has_ended
+
+func _process(dt):
+	var motion = target.position - self.position
+	translate(motion / 10)
+	
+	if motion.length_squared() < 0.1:
+		stopped = true
+	
+	if fadingOut:
+		var l = $label
+		var c = l.get(\"custom_colors/font_color\")
+		c.a -= 0.2
+
+		if c.a <= 0.0:
+			queue_free()
+			emit_signal(\"intro_has_ended\")
+		else:
+			l.set(\"custom_colors/font_color\", c)
+
+	if stopped:
+		timer -= 1
+		
+		if timer <= 0:
+			target = get_node(\"../target1b\")
+			fadingOut = true
+			stopped = false
+"
+
 [sub_resource type="DynamicFont" id=6]
 size = 8
 font_data = ExtResource( 2 )
@@ -169,21 +244,69 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "888/888"
 
 [node name="BBEE" type="Control" parent="ui"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 240.0
+margin_bottom = 135.0
+rect_scale = Vector2( 4, 4 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="target2" type="Position2D" parent="ui/BBEE"]
-position = Vector2( 116.669, 61.612 )
+position = Vector2( 29.167, 15.403 )
 z_as_relative = false
 
 [node name="target2b" type="Position2D" parent="ui/BBEE"]
-position = Vector2( 55.245, -21.669 )
+position = Vector2( 13.811, -5.417 )
 z_as_relative = false
+
+[node name="target1" type="Position2D" parent="ui/BBEE"]
+position = Vector2( 33.157, 18.239 )
+z_as_relative = false
+
+[node name="target1b" type="Position2D" parent="ui/BBEE"]
+position = Vector2( 46.331, 39.713 )
+z_as_relative = false
+
+[node name="title" type="Node2D" parent="ui/BBEE"]
+position = Vector2( 43.427, 35.754 )
+script = SubResource( 9 )
+
+[node name="label" type="Label" parent="ui/BBEE/title"]
+margin_top = -6.0
+margin_right = 110.0
+margin_bottom = 6.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0.97, 0.62, 0.21, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "LET THE BATTLE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="subtitle" type="Node2D" parent="ui/BBEE"]
+position = Vector2( 18.117, -0.887 )
+script = SubResource( 11 )
+
+[node name="label" type="Label" parent="ui/BBEE/subtitle"]
+margin_right = 110.0
+margin_bottom = 6.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0.97, 0.62, 0.21, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "COMMENCE!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BBBB" type="Control" parent="ui"]
 margin_right = 240.0
@@ -266,4 +389,5 @@ __meta__ = {
 [connection signal="has_found_an_actor" from="." to="ui/BEBE/actor_info" method="_on_battle_has_found_an_actor"]
 [connection signal="has_clicked" from="cursor" to="." method="_on_cursor_has_clicked"]
 [connection signal="has_moved" from="cursor" to="." method="_on_cursor_has_moved"]
+[connection signal="intro_has_ended" from="ui/BBEE/title" to="." method="_on_title_intro_has_ended"]
 [connection signal="pressed" from="ui/turn_control/next_turn" to="." method="_on_next_turn_pressed"]

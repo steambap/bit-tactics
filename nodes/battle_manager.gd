@@ -35,7 +35,6 @@ func _ready():
 		$ui/BBBB/turn_panel/turn.set("custom_colors/font_color", Color(1.0, 0.25, 0.25, 1.0))
 	
 	set_process_input(true)
-	_on_letTheBattle_intro_has_ended()
 
 func set_turn(_turn):
 	for actor in scene.get_actors():
@@ -125,11 +124,6 @@ func activate(enable):
 	print("BattleManager state changed to ", enable, ".")
 	active = enable
 
-func _on_letTheBattle_intro_has_ended():
-	activate(true)
-	get_cursor().show()
-	get_cursor().activate(true)
-
 func _on_next_turn_pressed():
 	next_turn()
 
@@ -142,3 +136,8 @@ func next_turn():
 	print("Turn has changed to ", turn)
 	
 	enemyAI.start()
+
+func _on_title_intro_has_ended():
+	activate(true)
+	get_cursor().show()
+	get_cursor().activate(true)
