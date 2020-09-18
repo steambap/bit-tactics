@@ -325,7 +325,7 @@ func ai_act():
 
 func attack(target):
 	var dam = preload("res://nodes/damage_popup.tscn").instance()
-	dam.set_pos(target.get_pos() + Vector2(0, -10))
+	dam.position = target.position + Vector2(0, -10)
 	get_parent().add_child(dam)
 	target.HP -= attackPower
 	dam.get_node("value").set_text(str(attackPower))
