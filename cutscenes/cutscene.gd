@@ -20,6 +20,8 @@ func next():
 func work():
 	if content.size() > 0:
 		content.front().start(self)
+	else:
+		set_process_input(false)
 
 func _input(ev):
 	if ev.is_action_pressed("ui_cancel"):
