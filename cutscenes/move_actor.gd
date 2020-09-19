@@ -11,12 +11,11 @@ func _ready():
 	set_process(false)
 
 func start(_manager):
-	print(get_name(), " has started!")
 	manager = _manager
-	
+
 	actorNode = get_node(actor)
 	actorNode.find_path_to(position)
-	
+
 	if shouldWaitArrival:
 		set_process(true)
 	else:
@@ -28,10 +27,7 @@ func skip():
 	end()
 
 func end():
-	print(get_name(), " has ended!")
-	manager.contentNow.pop_front()
-	manager.content.pop_front()
-	manager.work()
+	manager.next()
 
 func _process(_dt):
 	if !actorNode.should_move():

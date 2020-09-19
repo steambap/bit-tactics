@@ -14,7 +14,6 @@ var path = []
 
 var state = 0
 
-#var nearest = {}
 var myManagerAI = null
 var waitAI = 30
 var isAI = false
@@ -55,7 +54,6 @@ func _process(_dt):
 			else:
 				animIndex = 0
 				set_frame(animAngle * 4 + floor(animIndex))
-				#translate(motion.normalized() * 0.5)
 			
 			path.pop_front()
 			
@@ -94,8 +92,6 @@ func ai_make_decision(_manager):
 			print("AI SHOULD SHOULD ABORT")
 			set_gray(true)
 			state += 1
-			#isAI = false
-			#myManagerAI.make_decision()
 	else:
 		print("AI SHOULD SHOULD END")
 		set_gray(true)
@@ -112,7 +108,7 @@ func set_gray(enable):
 #THIS WILL RETURN THE PANELS (VECTOR2'S) THIS ACTOR CAN MOVE TO!
 func get_targettable_panels():
 	#its position in the map
-	var source = get_map_position()#scene.get_terrain().world_to_map(get_pos())
+	var source = get_map_position()
 	#var actors = scene.get_actors()
 	var targettable = []
 	
@@ -123,18 +119,7 @@ func get_targettable_panels():
 			
 			if pos == source:
 				continue
-			
-			#if the panel is occupied by an actor
-#			var isOccupied = false
-#			for p in actorsPos:
-#				if pos == p:
-#					isOccupied = true
-#					break
-			
-#			if isOccupied:
-#				continue
-			
-			#if it's not close enough
+
 			var difference = pos - source
 			if abs(difference.x) + abs(difference.y) > attackRange:
 				continue
@@ -332,17 +317,6 @@ func can_attack(targettablePanels, target):
 			return true
 	
 	return false
-	
-	
-	#for actor in scene.get_actors():
-	
-	#first we generate a path from it to the panel
-	#var path = scene.get_mstar().find_path_v(get_map_position(), pos)
-	
-	#if the path exists (> 0) and its size and equals or is lower than move (<=), vòila
-	#return path.size() > 0 && path.size() <= move
-
-
 
 func block_enemy_cells(enable):
 	if enable:
@@ -376,8 +350,6 @@ func look_at(position):
 	var angle = get_correct_angle(vector.angle())
 
 	animAngle = get_angle_side(angle)
-	
-	#set_frame(get_angle_side(angle))
 	
 	print("looking at angle: ", angle, " --> ", get_angle_string(angle))
 

@@ -61,10 +61,16 @@ func get_turn_name(_turn):
 
 func _input(ev):
 	if ev.is_action_pressed("ui_end"):
-
 		if turn == 0:
 			next_turn()
 			get_tree().set_input_as_handled()
+	elif Input.is_key_pressed(KEY_W):
+		get_tree().set_input_as_handled()
+		var collider = scene.get_terrain_collider()
+		if collider.visible:
+			collider.hide()
+		else:
+			collider.show()
 
 func get_scene():
 	return scene
@@ -86,8 +92,6 @@ func map_to_world_fixed(position):
 
 func _on_cursor_has_moved(sender):
 	if active:
-		print("UUUU")
-		
 		var cursorPosM = scene.get_terrain().world_to_map(sender.position)
 		
 		for actor in scene.get_actors():
@@ -102,8 +106,6 @@ func _on_cursor_has_moved(sender):
 		
 		hovered = null
 		emit_signal("has_found_an_actor", hovered)
-	else:
-		print("AAAA")
 
 func _on_cursor_has_clicked(sender):
 	if active && hovered:

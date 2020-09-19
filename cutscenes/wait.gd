@@ -7,15 +7,11 @@ func _ready():
 	set_process(false)
 
 func start(_manager):
-	print(get_name(), " has started!")
 	manager = _manager
 	set_process(true)
 
 func end():
-	print(get_name(), " has ended!")
-	manager.contentNow.pop_front()
-	manager.content.pop_front()
-	manager.work()
+	manager.next()
 	queue_free()
 
 func _process(_dt):

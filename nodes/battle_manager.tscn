@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://nodes/battle_manager.gd" type="Script" id=1]
 [ext_resource path="res://fonts/pixelated.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://nodes/cursor.png" type="Texture" id=3]
+[ext_resource path="res://nodes/actor_info_control.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
@@ -57,45 +58,6 @@ func activate(enable):
 "
 
 [sub_resource type="GDScript" id=2]
-script/source = "extends Panel
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-func update_info(actor):
-	$name.set_text(actor.actorName)
-	
-	#if it's an enemy, show its name red, otherwise, blue
-	if actor.get_group() > 0:
-		$name.set(\"custom_colors/font_color\", Color(1.0, 0.25, 0.25, 1.0))
-	else:
-		$name.set(\"custom_colors/font_color\", Color(0.25, 0.25, 1.0, 1.0))
-		
-	$health/value.set_text(str(actor.HP, \"/\", actor.maxHP))
-
-func _on_battle_has_found_an_actor(actor):
-	if actor == null:
-		self.hide()
-	else:
-		update_info(actor)
-		self.show()
-"
-
-[sub_resource type="DynamicFont" id=3]
-size = 8
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 8
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 8
-font_data = ExtResource( 2 )
-
-[sub_resource type="GDScript" id=9]
 script/source = "extends Node2D
 var fadingOut = false
 var stopped = false
@@ -104,7 +66,7 @@ onready var target = get_node(\"../target2\")
 
 signal intro_has_ended
 
-func _process(dt):
+func _process(_dt):
 	var motion = target.position - self.position
 	translate(motion / 10)
 	
@@ -131,10 +93,10 @@ func _process(dt):
 			stopped = false
 "
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 2 )
 
-[sub_resource type="GDScript" id=11]
+[sub_resource type="GDScript" id=4]
 script/source = "extends Node2D
 var fadingOut = false
 var stopped = false
@@ -143,7 +105,7 @@ onready var target = get_node(\"../target1\")
 
 signal intro_has_ended
 
-func _process(dt):
+func _process(_dt):
 	var motion = target.position - self.position
 	translate(motion / 10)
 	
@@ -170,15 +132,15 @@ func _process(dt):
 			stopped = false
 "
 
+[sub_resource type="DynamicFont" id=5]
+size = 8
+font_data = ExtResource( 2 )
+
 [sub_resource type="DynamicFont" id=6]
 size = 8
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 8
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=8]
 size = 8
 font_data = ExtResource( 2 )
 
@@ -194,54 +156,7 @@ script = SubResource( 1 )
 
 [node name="ui" type="CanvasLayer" parent="."]
 
-[node name="BEBE" type="Control" parent="ui"]
-rect_scale = Vector2( 4, 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="actor_info" type="Panel" parent="ui/BEBE"]
-margin_left = 2.0
-margin_top = 114.0
-margin_right = 50.0
-margin_bottom = 133.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-script = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="name" type="Label" parent="ui/BEBE/actor_info"]
-margin_left = 3.0
-margin_right = 40.0
-margin_bottom = 9.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Guy"
-
-[node name="health" type="Label" parent="ui/BEBE/actor_info"]
-margin_left = 3.0
-margin_top = 9.0
-margin_right = 43.0
-margin_bottom = 23.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "HP:"
-
-[node name="value" type="Label" parent="ui/BEBE/actor_info/health"]
-margin_left = 12.0
-margin_right = 52.0
-margin_bottom = 14.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-custom_fonts/font = SubResource( 5 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "888/888"
+[node name="BEBE" parent="ui" instance=ExtResource( 4 )]
 
 [node name="BBEE" type="Control" parent="ui"]
 anchor_left = 0.25
@@ -275,7 +190,7 @@ z_as_relative = false
 
 [node name="title" type="Node2D" parent="ui/BBEE"]
 position = Vector2( 43.427, 35.754 )
-script = SubResource( 9 )
+script = SubResource( 2 )
 
 [node name="label" type="Label" parent="ui/BBEE/title"]
 margin_top = -6.0
@@ -283,7 +198,7 @@ margin_right = 110.0
 margin_bottom = 6.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.97, 0.62, 0.21, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "LET THE BATTLE"
@@ -293,14 +208,14 @@ __meta__ = {
 
 [node name="subtitle" type="Node2D" parent="ui/BBEE"]
 position = Vector2( 18.117, -0.887 )
-script = SubResource( 11 )
+script = SubResource( 4 )
 
 [node name="label" type="Label" parent="ui/BBEE/subtitle"]
 margin_right = 110.0
 margin_bottom = 6.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.97, 0.62, 0.21, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "COMMENCE!"
@@ -333,7 +248,7 @@ margin_right = 31.0
 margin_bottom = 10.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Player"
 
@@ -344,7 +259,7 @@ margin_left = 4.0
 margin_top = 0.188297
 margin_right = 5.0
 margin_bottom = 9.1883
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "turn"
 __meta__ = {
@@ -381,12 +296,12 @@ margin_right = -2.0
 margin_bottom = -3.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "End Turn"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="has_found_an_actor" from="." to="ui/BEBE/actor_info" method="_on_battle_has_found_an_actor"]
+[connection signal="has_found_an_actor" from="." to="ui/BEBE" method="_on_battle_has_found_an_actor"]
 [connection signal="has_clicked" from="cursor" to="." method="_on_cursor_has_clicked"]
 [connection signal="has_moved" from="cursor" to="." method="_on_cursor_has_moved"]
 [connection signal="intro_has_ended" from="ui/BBEE/title" to="." method="_on_title_intro_has_ended"]
