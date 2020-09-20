@@ -18,26 +18,7 @@ func _init(_width, _height):
 	#connect the points
 	for x in range(width):
 		for y in range(height):
-			var id = flatten(x, y)
-			var cpos = astar.get_point_position(id)
-
-			#get neighbours
-			var u = cpos + Vector2(0, -1)
-			var d = cpos + Vector2(0,  1)
-			var r = cpos + Vector2(1, 0)
-			var l = cpos + Vector2(-1, 0)
-
-			if point_within(u.x, u.y) && !astar.are_points_connected(id, flatten(u.x, u.y)):
-				astar.connect_points(id, flatten(u.x, u.y))
-			
-			if point_within(d.x, d.y) && !astar.are_points_connected(id, flatten(d.x, d.y)):
-				astar.connect_points(id, flatten(d.x, d.y))
-			
-			if point_within(r.x, r.y) && !astar.are_points_connected(id, flatten(r.x, r.y)):
-				astar.connect_points(id, flatten(r.x, r.y))
-			
-			if point_within(l.x, l.y) && !astar.are_points_connected(id, flatten(l.x, l.y)):
-				astar.connect_points(id, flatten(l.x, l.y))
+			freec(x, y)
 
 # HELPERS
 
@@ -76,6 +57,13 @@ func flatten(_x, _y):
 func point_within(_x, _y):
 	return (_x >= 0 && _y >= 0 && _x < width  && _y < height)
 
+func disable_point(pos):
+	var id = flatten(pos.x, pos.y)
+	astar.set_point_disabled(id)
+
+func enable_point(pos):
+	var id = flatten(pos.x, pos.y)
+	astar.set_point_disabled(id, false)
 
 func connect_with_neighbour_at(id, offset):
 	var p = astar.get_point_position(id) + offset
@@ -100,50 +88,3 @@ func find_path(x1, y1, x2, y2):
 
 func find_path_v(_src, _dest):
 	return astar.get_point_path(flatten(floor(_src.x), floor(_src.y)), flatten(floor(_dest.x), floor(_dest.y)))
-
-func find_path_mult_offset(x1, y1, x2, y2, mult, offset):
-	var source = astar.get_point_path(flatten(x1, y1), flatten(x2, y2))
-	var dest = []
-	
-	for point in source:
-		dest.append(point * mult + offset)
-	
-	return dest
-
-func find_path_mult_offset_vec(_source, _dest, mult, offset):
-	var source = astar.get_point_path(flatten(_source.x, _source.y), flatten(_dest.x, _dest.y))
-	var dest = []
-	
-	for point in source:
-		dest.append(point * mult + offset)
-	
-	return dest
-
-
-func get_reachable_panels(_source, _range, _min, _max):
-	
-	var reachable = []
-	
-	for x in range(max(_min.x, _source.x - _range), min(_source.x + _range + 1, _max.x)):
-			for y in range(max(_min.y, _source.y - _range), min(_source.y + _range + 1, _max.y)):
-				
-				var path = find_path(_source.x, _source.y, x, y)
-				
-				if path.size() > 1 && path.size() <= _range + 1:
-					reachable.append(Vector2(x, y))
-	
-	return reachable
-
-func get_reachable_panels_mult_offset(_source, _range, _min, _max, mult, offset):
-	
-	var reachable = []
-	
-	for x in range(max(_min.x, _source.x - _range), min(_source.x + _range + 1, _max.x)):
-			for y in range(max(_min.y, _source.y - _range), min(_source.y + _range + 1, _max.y)):
-				
-				var path = find_path(_source.x, _source.y, x, y)
-				
-				if path.size() > 1 && path.size() <= _range + 1:
-					reachable.append(Vector2(x, y) * mult + offset)
-	
-	return reachable
