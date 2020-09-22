@@ -329,25 +329,25 @@ func look_at(position):
 	print("looking at angle: ", angle, " --> ", get_angle_string(angle))
 
 func get_angle_string(degrees):
-	if abs(115 - degrees) < 20:
+	if abs(325 - degrees) < 20:
 		return "DOWN"
-	if abs(245 - degrees) < 20:
+	if abs(215 - degrees) < 20:
 		return "RIGHT"
-	if abs(295 - degrees) < 20:
+	if abs(145 - degrees) < 20:
 		return "UP"
-	if abs(65 - degrees) < 20:
+	if abs(35 - degrees) < 20:
 		return "LEFT"
 	
 	return "---"
 
 func get_angle_side(degrees):
-	if abs(115 - degrees) < 20:
+	if abs(325 - degrees) < 20:
 		return 1
-	if abs(245 - degrees) < 20:
+	if abs(215 - degrees) < 20:
 		return 0
-	if abs(295 - degrees) < 20:
+	if abs(145 - degrees) < 20:
 		return 2
-	if abs(65 - degrees) < 20:
+	if abs(35 - degrees) < 20:
 		return 3
 	
 	return 0
