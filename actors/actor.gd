@@ -325,30 +325,16 @@ func look_at(position):
 	var angle = get_correct_angle(vector.angle())
 
 	animAngle = get_angle_side(angle)
-	
-	print("looking at angle: ", angle, " --> ", get_angle_string(angle))
-
-func get_angle_string(degrees):
-	if abs(325 - degrees) < 20:
-		return "DOWN"
-	if abs(215 - degrees) < 20:
-		return "RIGHT"
-	if abs(145 - degrees) < 20:
-		return "UP"
-	if abs(35 - degrees) < 20:
-		return "LEFT"
-	
-	return "---"
 
 func get_angle_side(degrees):
 	if abs(325 - degrees) < 20:
-		return 1
+		return 1 # DOWN
 	if abs(215 - degrees) < 20:
-		return 0
+		return 0 # RIGHT
 	if abs(145 - degrees) < 20:
-		return 2
+		return 2 # UP
 	if abs(35 - degrees) < 20:
-		return 3
+		return 3 # LEFT
 	
 	return 0
 
