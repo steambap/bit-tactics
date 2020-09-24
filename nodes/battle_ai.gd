@@ -1,3 +1,4 @@
+class_name BattleAI
 extends Node
 var manager
 var friends

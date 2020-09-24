@@ -8,9 +8,38 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Sprite",
+"class": "Actor",
+"language": "GDScript",
+"path": "res://actors/actor.gd"
+}, {
+"base": "Node",
+"class": "BattleAI",
+"language": "GDScript",
+"path": "res://nodes/battle_ai.gd"
+}, {
+"base": "Node",
+"class": "CutScene",
+"language": "GDScript",
+"path": "res://cutscenes/cutscene.gd"
+}, {
+"base": "Node2D",
+"class": "DamagePopup",
+"language": "GDScript",
+"path": "res://nodes/damage_popup.gd"
+}, {
+"base": "Reference",
+"class": "MStar",
+"language": "GDScript",
+"path": "res://scripts/mstar.gd"
+} ]
 _global_script_class_icons={
-
+"Actor": "",
+"BattleAI": "",
+"CutScene": "",
+"DamagePopup": "",
+"MStar": ""
 }
 
 [application]

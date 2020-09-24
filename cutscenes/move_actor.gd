@@ -4,13 +4,13 @@ export(NodePath) var actor
 export(Vector2) var position
 export(bool) var shouldWaitArrival
 
-var manager
-var actorNode
+var manager: CutScene
+var actorNode: Actor
 
 func _ready():
 	set_process(false)
 
-func start(_manager):
+func start(_manager: CutScene):
 	manager = _manager
 
 	actorNode = get_node(actor)
@@ -35,5 +35,5 @@ func _process(_dt):
 			end()
 		queue_free()
 
-func should_wait_end():
+func should_wait_end() -> bool:
 	return shouldWaitArrival

@@ -2,14 +2,14 @@ extends Node
 
 export(NodePath) var actor
 export(bool) var waitEnd
-var manager
+var manager: CutScene
 
-var _actor
+var _actor: Actor
 
 func _ready():
 	set_process(false)
 
-func start(_manager):
+func start(_manager: CutScene):
 	manager = _manager
 	
 	_actor = get_node(actor)
@@ -37,5 +37,5 @@ func skip():
 	_actor.modulate.a = 1.0
 	end()
 
-func should_wait_end():
+func should_wait_end() -> bool:
 	return waitEnd

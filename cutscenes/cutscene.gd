@@ -1,7 +1,8 @@
+class_name CutScene
 extends Node
 
-onready var scene = get_parent()
-var content = []
+onready var scene := get_parent()
+var content := []
 
 func _ready():
 	set_process_input(true)
@@ -23,7 +24,7 @@ func work():
 	else:
 		set_process_input(false)
 
-func _input(ev):
+func _input(ev: InputEvent):
 	if ev.is_action_pressed("ui_cancel"):
 		set_process_input(false)
 		get_tree().set_input_as_handled()

@@ -1,10 +1,10 @@
 extends Node
 
 export var dialogue = ""
-var manager
+var manager: CutScene
 var dialogueObj
 
-func start(_manager):
+func start(_manager: CutScene):
 	print(get_name(), " has started!")
 	manager = _manager
 
@@ -22,5 +22,5 @@ func end():
 	manager.next()
 	queue_free()
 
-func should_wait_end():
+func should_wait_end() -> bool:
 	return true

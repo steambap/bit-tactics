@@ -1,8 +1,9 @@
+class_name DamagePopup
 extends Node2D
 
-var goalY
-var timer = 45
-var toDie = false
+var goalY: Vector2
+var timer := 45
+var toDie := false
 
 func _ready():
 	goalY = self.global_position - Vector2(0, 12)

@@ -1,6 +1,6 @@
 extends Node
 
-var mstar
+var mstar: MStar
 
 var manager
 
@@ -11,17 +11,17 @@ func _ready():
 	mstar = preload("res://scripts/mstar.gd").new(50, 50)
 	mstar.block_based_on_tilemap(get_terrain_collider())
 
-func get_terrain():
-	return $terrain
+func get_terrain() -> TileMap:
+	return $terrain as TileMap
 
 func get_manager():
 	return manager
 
-func get_mstar():
+func get_mstar() -> MStar:
 	return mstar
 
-func get_terrain_collider():
-	return $terrain/collider
+func get_terrain_collider() -> TileMap:
+	return $terrain/collider as TileMap
 
 func get_actors():
 	var actors = []
@@ -32,7 +32,7 @@ func get_actors():
 	
 	return actors
 
-func get_actors_from_group(g):
+func get_actors_from_group(g: int):
 	var actors = []
 	
 	for a in get_node("objects").get_children():
@@ -42,6 +42,6 @@ func get_actors_from_group(g):
 	
 	return actors
 
-func map_to_world_fixed(position):
+func map_to_world_fixed(position: Vector2) -> Vector2:
 	var terrain = get_terrain()
 	return terrain.map_to_world(position) + Vector2(0, terrain.get_cell_size().y * 0.5)

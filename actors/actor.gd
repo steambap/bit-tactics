@@ -1,3 +1,4 @@
+class_name Actor
 extends Sprite
 
 export var actorName = "Unnamed"
