@@ -26,7 +26,7 @@ var aiActionEndTimer = -1
 var isWaitingForNextStepAI = false
 var nextStepTimerAI = 0
 
-onready var scene = get_tree().current_scene
+onready var scene = get_parent().get_parent()
 
 func should_move():
 	return path.size() > 0

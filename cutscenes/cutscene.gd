@@ -26,5 +26,6 @@ func work():
 func _input(ev):
 	if ev.is_action_pressed("ui_cancel"):
 		set_process_input(false)
+		get_tree().set_input_as_handled()
 		for c in get_children():
 			c.skip()

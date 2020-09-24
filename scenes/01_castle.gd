@@ -7,9 +7,7 @@ var manager
 func _ready():
 	set_process(true)
 	set_process_input(true)
-	
-	#var terrainSize = get_terrain().get_used_rect().size
-	#var m = max(terrainSize.width, terrainSize.height)
+
 	mstar = preload("res://scripts/mstar.gd").new(50, 50)
 	mstar.block_based_on_tilemap(get_terrain_collider())
 
