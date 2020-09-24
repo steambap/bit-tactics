@@ -3,9 +3,9 @@ extends Node2D
 var Marker = preload("res://nodes/move_marker.tscn")
 
 onready var manager = get_parent()
-var frame = 0
-var time = 12
-var actor
+var frame := 0
+var time := 12
+var actor: Actor
 
 func _ready():
 	print("ACT state started, my actor: ", actor.actorName, ". Move: ", actor.move)
@@ -74,10 +74,3 @@ func start():
 					
 					get_tree().set_input_as_handled()
 					return
-
-func is_free(list, terrain, source):
-	for A in list:
-		var pos = terrain.world_to_map(A.position)
-		if pos == source:
-			return false
-	return true

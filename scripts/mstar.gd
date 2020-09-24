@@ -79,14 +79,16 @@ func disconnect_with_neighbour_at(id: int, offset: Vector2):
 	if point_within(p.x, p.y) && astar.are_points_connected( id, flatten(p.x, p.y) ):
 		astar.disconnect_points(id, flatten(p.x, p.y))
 
-func show_path_info(path: PoolVector2Array):
+func show_path_info(path: Array):
 	print(path.size())
 	
 	for i in path:
 		print(i)
+# PoolVector2Array is a value, not a reference
+func find_path(x1: float, y1: float, x2: float, y2: float) -> Array:
+	var a := astar.get_point_path(flatten(floor(x1), floor(y1)), flatten(floor(x2), floor(y2)))
+	return Array(a)
 
-func find_path(x1: float, y1: float, x2: float, y2: float) -> PoolVector2Array:
-	return astar.get_point_path(flatten(floor(x1), floor(y1)), flatten(floor(x2), floor(y2)))
-
-func find_path_v(_src: Vector2, _dest: Vector2) -> PoolVector2Array:
-	return astar.get_point_path(flatten(floor(_src.x), floor(_src.y)), flatten(floor(_dest.x), floor(_dest.y)))
+func find_path_v(_src: Vector2, _dest: Vector2) -> Array:
+	var a := astar.get_point_path(flatten(floor(_src.x), floor(_src.y)), flatten(floor(_dest.x), floor(_dest.y)))
+	return Array(a)

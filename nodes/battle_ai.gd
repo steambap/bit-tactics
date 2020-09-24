@@ -1,11 +1,11 @@
 class_name BattleAI
 extends Node
-var manager
-var friends
-var foes
-var available
-var timer = 30
-var endTimer = 30
+var manager # BattleManager
+var friends: Array
+var foes: Array
+var available: Array
+var timer := 30
+var endTimer := 30
 func start():
 	friends = get_friends()
 	available = [] + friends
@@ -43,7 +43,7 @@ func _process(_dt):
 	else:
 		endTimer -= 1
 
-func get_friends():
+func get_friends() -> Array:
 	
 	var _f = []
 	
@@ -53,7 +53,7 @@ func get_friends():
 	
 	return _f
 
-func get_foes():
+func get_foes() -> Array:
 	
 	var _f = []
 	

@@ -1,8 +1,9 @@
+class_name Scene
 extends Node
 
 var mstar: MStar
 
-var manager
+var manager: BattleManager
 
 func _ready():
 	set_process(true)

@@ -1,11 +1,11 @@
+class_name BattleManager
 extends Node
 
 onready var scene = get_parent()
 
 var hovered = null
-var active = false
-var turn = 0
-var mstar
+var active := false
+var turn := 0
 
 var enemyAI
 
@@ -27,7 +27,7 @@ func _ready():
 	
 	get_cursor().activate(false)
 	
-	$ui/BBBB/turn_panel/turn.set_text(str(get_turn_name(turn)))
+	$ui/BBBB/turn_panel/turn.set_text(get_turn_name(turn))
 
 	if turn == 0:
 		$ui/BBBB/turn_panel/turn.set("custom_colors/font_color", Color(0.25, 0.25, 1.0, 1.0))
@@ -42,7 +42,7 @@ func set_turn(_turn):
 		actor.state = 0
 	
 	turn = _turn
-	$ui/BBBB/turn_panel/turn.set_text(str(get_turn_name(turn)))
+	$ui/BBBB/turn_panel/turn.set_text(get_turn_name(turn))
 	
 	if turn == 0:
 		$ui/BBBB/turn_panel/turn.set("custom_colors/font_color", Color(0.25, 0.25, 1.0, 1.0))
@@ -53,7 +53,7 @@ func set_turn(_turn):
 	
 	get_cursor().activate(turn == 0)
 
-func get_turn_name(_turn):
+func get_turn_name(_turn) -> String:
 	if _turn == 0:
 		return "Player"
 	else:
@@ -75,10 +75,10 @@ func _input(ev):
 func get_scene():
 	return scene
 
-func get_cursor():
+func get_cursor() -> Node:
 	return $cursor
 
-func fix_position(node):
+func fix_position(node: Node):
 	var terrain = scene.get_terrain()
 	
 	var m = terrain.world_to_map(node.position)
@@ -86,7 +86,7 @@ func fix_position(node):
 	
 	node.position = w + Vector2(0, terrain.get_cell_size().y * 0.5)
 
-func map_to_world_fixed(position):
+func map_to_world_fixed(position) -> Vector2:
 	var terrain = scene.get_terrain()
 	return terrain.map_to_world(position) + Vector2(0, terrain.get_cell_size().y * 0.5)
 
@@ -122,7 +122,7 @@ func _on_cursor_has_clicked(sender):
 			_actState.actor = hovered
 			add_child(_actState)
 
-func activate(enable):
+func activate(enable: bool):
 	print("BattleManager state changed to ", enable, ".")
 	active = enable
 

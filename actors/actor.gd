@@ -11,25 +11,25 @@ export var attackPower = 24
 export var maxHP = 100
 export var HP = 100
 
-var path = []
+var path := []
 
-var state = 0
+var state := 0
 
-var myManagerAI = null
-var waitAI = 30
-var isAI = false
+var myManagerAI: BattleAI
+var waitAI := 30
+var isAI := false
 
-var animIndex = 0.0
-var animAngle = 0
+var animIndex := 0.0
+var animAngle := 0
 
-var aiActionEndTimer = -1
+var aiActionEndTimer := -1
 
-var isWaitingForNextStepAI = false
-var nextStepTimerAI = 0
+var isWaitingForNextStepAI := false
+var nextStepTimerAI := 0
 
 onready var scene = get_parent().get_parent()
 
-func should_move():
+func should_move() -> bool:
 	return path.size() > 0
 
 func _process(_dt):
@@ -50,7 +50,7 @@ func _process(_dt):
 				look_at(path[1])
 			else:
 				animIndex = 0
-				set_frame(animAngle * 4 + floor(animIndex))
+				set_frame(animAngle * 4 + floor(animIndex) as int)
 			
 			path.pop_front()
 			
@@ -61,7 +61,7 @@ func _process(_dt):
 				animIndex += 0.2
 			else:
 				animIndex = 0.0
-			set_frame(animAngle * 4 + floor(animIndex))
+			set_frame(animAngle * 4 + floor(animIndex) as int)
 			
 			print("FRAME: ", animAngle * 4 + floor(animIndex))
 				
@@ -183,23 +183,6 @@ func get_move():
 func get_group():
 	return group
 
-func get_nearest_foe():
-	
-	var nearest = null
-	var nearestDistance = 0
-	
-	var source = get_map_position()
-	
-	for foe in get_foes():
-		var pos = foe.get_map_position()
-		var pathV = scene.get_mstar().find_path_v(source, pos)
-		
-		if pathV.size() < nearestDistance:
-			nearestDistance = pathV.size()
-			nearest = foe
-	
-	return nearest
-
 func get_nearest_foe_and_info():
 	var nearest = null
 	var distance = 999
@@ -217,7 +200,7 @@ func get_nearest_foe_and_info():
 		#if nearest hasn't been set or the distance to THIS guy is lower than the current nearest
 		if pathV.size() <= distance:
 			#this is the new nearest
-			distance = path.size()
+			distance = pathV.size()
 			nearest = foe
 			n["path"] = pathV
 			n["actor"] = nearest
@@ -245,11 +228,11 @@ func ai_move():
 	#get the nearest enemy
 	var nearest = get_nearest_foe_and_info()
 	print("AI:", actorName, " just found ", nearest["actor"].name, " to be the nearest. Distance: ", nearest["distance"])
-	
+
 	#invert the path to it because we will be checking from backwards
 	nearest["path"].invert()
 	var movable = get_movable_panels()
-	
+
 	#loop through the path to the nearest foe
 	for i in nearest["path"]:
 		#if i can move to that panel, do so
