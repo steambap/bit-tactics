@@ -64,13 +64,6 @@ func _input(ev):
 		if turn == 0:
 			next_turn()
 			get_tree().set_input_as_handled()
-	elif Input.is_key_pressed(KEY_W):
-		get_tree().set_input_as_handled()
-		var collider = scene.get_terrain_collider()
-		if collider.visible:
-			collider.hide()
-		else:
-			collider.show()
 
 func get_scene():
 	return scene
